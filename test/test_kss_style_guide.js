@@ -78,6 +78,7 @@ describe('KssStyleGuide object API', function() {
             header: 'example',
             markup: '<div class="example">lorem ipsum</div>',
             modifiers: [],
+            childSections: [],
             parameters: [],
             reference: '1.1',
             referenceNumber: '1.1',

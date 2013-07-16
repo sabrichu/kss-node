@@ -320,6 +320,20 @@ class KssBuilderBaseTwig extends KssBuilderBase {
         sectionRoots.push(currentRoot);
       }
 
+      // Add childSections for each section
+      let sectionNumbers = section.reference().split(this.styleGuide.referenceDelimiter()),
+        parentReference = sectionNumbers.slice(0, sectionNumbers.length - 1).join(this.styleGuide.referenceDelimiter()),
+        parentSection = this.styleGuide.sections(parentReference);
+
+        // Root sections have an empty parentReference
+      if (parentReference) {
+        if (parentSection) {
+          parentSection.childSections([section]);
+        } else {
+          this.log('WARNING: Section ' + section.reference() + ' is missing its parent: ' + parentReference);
+        }
+      }
+
       if (!section.markup()) {
         return;
       }
